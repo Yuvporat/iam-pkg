@@ -9,7 +9,8 @@ import {
   RoleEntityDTO,
   CreateRoleDTO,
   UpdateRoleDTO,
-  DeleteRoleDTO
+  DeleteRoleDTO,
+  DeleteRolesDTO,
 } from '../types/role.dto';
 import { RoleAction, SERVICE_NAME } from '../common/constants';
 
@@ -68,6 +69,10 @@ class RoleService extends TransportAwareService implements IAppPkg {
 
   async deleteRole(data: DeleteRoleDTO, correlationId?: string): Promise<void> {
     await this.sendActionViaTransport(RoleAction.DeleteRole, data, correlationId);
+  }
+
+  async deleteRoles(data: DeleteRolesDTO, correlationId?: string): Promise<void> {
+    await this.sendActionViaTransport(RoleAction.DeleteRoles, data, correlationId);
   }
 
   private async sendActionViaTransport(action: RoleAction, data: object, correlationId?: string): Promise<object> {

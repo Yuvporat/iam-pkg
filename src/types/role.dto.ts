@@ -33,6 +33,11 @@ export interface GetRoleDTO {
   name?: string;
 }
 
+export interface FindAllRolesResponse {
+  results: RoleEntityDTO[];
+  count: number;
+}
+
 export const GetRoleDTOSchema = z.union([
   z.object({
     id: z.uuidv4('id must be in uuid4 format'),
@@ -50,4 +55,12 @@ export interface DeleteRoleDTO {
 
 export const DeleteRoleDTOSchema = z.object({
   id: z.uuidv4('id must be in uuid4 format'),
+});
+
+export interface DeleteRolesDTO {
+  ids: string[];
+}
+
+export const DeleteRolesDTOSchema = z.object({
+  ids: z.array(z.uuidv4('each id must be in uuid4 format')).min(1, 'ids cannot be empty'),
 });
